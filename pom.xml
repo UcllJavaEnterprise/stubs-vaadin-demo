@@ -103,7 +103,7 @@
     </dependencies>
 
     <build>
-        <finalName>stubs2</finalName>
+        <finalName>stubs2-demo</finalName>
         <plugins>
             <plugin>
                 <groupId>com.vaadin</groupId>
@@ -126,7 +126,7 @@
                     <!--       <project><build><finalName>           -->
                     <filename>${project.build.finalName}.war</filename>
                     <!-- !!!!!!! REPLACE WITH YOUR LOCAL VM IP ADDRESS !!!!! -->
-                    <hostname>192.168.195.130</hostname>
+                    <hostname>192.168.171.71</hostname>
                     <port>9990</port>
                     <username>student</username>
                     <password>student</password>
