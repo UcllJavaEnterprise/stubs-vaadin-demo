@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
+        bean-discovery-mode="all">
+
+    <!--
+      In the old days all EJB had to be listed and described in this beans.xml file
+      Nowadays using @ annotations this benas. xml no longe ris required.
+
+      However Vaadin requires this beans.xml file to be presxent just 'know' that there are EJB's in the project
+      even though this file is further empty.
+    -->
+
+</beans>

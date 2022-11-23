@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <!-- For usage in combination with the datasource specified inside WildFly Application Server -->
+    <persistence-unit name="LocalPostgresPU" transaction-type="JTA">
+        <jta-data-source>java:/PostgresDS</jta-data-source>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <!--
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="LocalPostgresPU2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.195.130:5432/stubs"/>
+            <property name="javax.persistence.jdbc.user" value="stubsuser"/>
+            <property name="javax.persistence.jdbc.password" value="stubsuser"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+        </properties>
+    </persistence-unit>
+
+<!-- DOCUMENTATION
+
+1. What are the potential values of hibernate.hbm2ddl.auto
+   validate: validate the schema, makes no changes to the database.
+   update: update the schema.
+   create: creates the schema, destroying previous data.
+   create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
+   none: does nothing with the schema, makes no changes to the database
+
+2. What are the potential values of transaction-type?
+
+RESOURCE_LOCAL
+  With <persistence-unit transaction-type="RESOURCE_LOCAL"> you are responsible for EntityManager (PersistenceContext/Cache) creating and tracking
+    You must use the EntityManagerFactory to get an EntityManager
+    The resulting EntityManager instance is a PersistenceContext/Cache An EntityManagerFactory can be injected via the @PersistenceUnit annotation only (not @PersistenceContext)
+    You are not allowed to use @PersistenceContext to refer to a unit of type RESOURCE_LOCAL
+    You must use the EntityTransaction API to begin/commit around every call to your EntityManger
+    Calling entityManagerFactory.createEntityManager() twice results in two separate EntityManager instances and therefor two separate PersistenceContexts/Caches.
+    It is almost never a good idea to have more than one instance of an EntityManager in use (don't create a second one unless you've destroyed the first)
+
+JTA
+  With <persistence-unit transaction-type="JTA"> the container will do EntityManager (PersistenceContext/Cache) creating and tracking.
+    You cannot use the EntityManagerFactory to get an EntityManager
+    You can only get an EntityManager supplied by the container
+    An EntityManager can be injected via the @PersistenceContext annotation only (not @PersistenceUnit)
+    You are not allowed to use @PersistenceUnit to refer to a unit of type JTA
+    The EntityManager given by the container is a reference to the PersistenceContext/Cache associated with a JTA Transaction.
+    If no JTA transaction is in progress, the EntityManager cannot be used because there is no PersistenceContext/Cache.
+    Everyone with an EntityManager reference to the same unit in the same transaction will automatically have a reference to the same PersistenceContext/Cache
+    The PersistenceContext/Cache is flushed and cleared at JTA commit time
+-->
+
+</persistence>
