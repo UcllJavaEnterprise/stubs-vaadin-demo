@@ -88,49 +88,49 @@ public class StudentEJBTest {
 
     @Test // Test dat student Naam gelijk aan 'TestNaam' 1 student terug geeft => OK test
     public void getStudentsOKNaam(){
-        List<StudentDTO> lst = ejb.getStudents("TestNaam", null);
+        List<StudentDTO> lst = ejb.getStudents("D'hooghe", null);
         assertEquals(1, lst.size());
     }
 
     @Test // Test dat student Naam gelijk aan 'TestNaam' 1 student terug geeft => OK test case insensitive
     public void getStudentsOKCaseInsensitive(){
-        List<StudentDTO> lst = ejb.getStudents("testnaam", null);
+        List<StudentDTO> lst = ejb.getStudents("d'hooghe", null);
         assertEquals(1, lst.size());
     }
 
     @Test // Test dat student Naam gelijk aan 'TestNaam' 1 student terug geeft => OK test
     public void getStudentsOKPartial(){
-        List<StudentDTO> lst = ejb.getStudents("TestNaam", null);
+        List<StudentDTO> lst = ejb.getStudents("D'hoogh", null);
         assertEquals(1, lst.size());
     }
 
     @Test
     public void getStudentsOK() {
-        List<StudentDTO> lst = ejb.getStudents("TestNaam", "TestVoornaam");
+        List<StudentDTO> lst = ejb.getStudents("D'hooghe", "Sophie");
         assertEquals(1, lst.size());
     }
 
     @Test
     public void getStudentsPartialLowercase() {
-        List<StudentDTO> lst = ejb.getStudents("testna", "testv");
+        List<StudentDTO> lst = ejb.getStudents("d'hooghe", "soph");
         assertEquals(1, lst.size());
     }
 
     @Test
     public void getStudentsNaamNull() {
-        List<StudentDTO> lst = ejb.getStudents(null, "TestVoornaam");
+        List<StudentDTO> lst = ejb.getStudents(null, "Sophie");
         assertEquals(1, lst.size());
     }
 
     @Test
     public void getStudentsNaamLeeg() {
-        List<StudentDTO> lst = ejb.getStudents("", "TestVoornaam");
+        List<StudentDTO> lst = ejb.getStudents("", "Sophie");
         assertEquals(1, lst.size());
     }
 
     @Test
     public void getStudentsNaamWhitespace() {
-        List<StudentDTO> lst = ejb.getStudents(" ", "estvoorna");
+        List<StudentDTO> lst = ejb.getStudents(" ", "Sophie");
         assertEquals(1, lst.size());
     }
 

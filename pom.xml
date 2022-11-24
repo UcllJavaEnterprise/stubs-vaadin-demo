@@ -117,6 +117,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <requireHomeNodeExec>true</requireHomeNodeExec>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
@@ -126,7 +129,7 @@
                     <!--       <project><build><finalName>           -->
                     <filename>${project.build.finalName}.war</filename>
                     <!-- !!!!!!! REPLACE WITH YOUR LOCAL VM IP ADDRESS !!!!! -->
-                    <hostname>192.168.171.71</hostname>
+                    <hostname>192.168.72.128</hostname>
                     <port>9990</port>
                     <username>student</username>
                     <password>student</password>
